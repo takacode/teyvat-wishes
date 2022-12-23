@@ -1,0 +1,39 @@
+<h1 align="center">TakaGG's Teyvat Wishes</h1>
+<h3 align="center">🕒 Last updated at <u>{{ updated_at }}</u></h3>
+<p align="center">Personal recordings of my recent wish history (up to 200 for each banner).</u></p>
+<br />
+<details>
+    <summary>Character Event Wishes</summary>
+    <table>
+    {%- for wish in character_banner_history -%}
+    <tr>
+        <td>{{ wish.time }}</td>
+        <td {% if wish.rarity == 4 %}style="color:purple"{% elif wish.rarity == 5 %}style="color:gold"{%- endif %}>
+            {{ wish.name }} ({{ wish.rarity }}* {{ wish.type }})
+        </td>
+    </tr>
+    {%- endfor -%}
+    </table>
+</details>
+<details>
+    <summary>Weapon Event Wishes</summary>
+    <table>
+    {%- for wish in weapon_banner_history -%}
+    <tr>
+        <td>{{ wish.time }}</td>
+        <td>{{ wish.name }} ({{ wish.rarity }}* {{ wish.type }})</td>
+    </tr>
+    {%- endfor -%}
+    </table>
+</details>
+<details>
+    <summary>Permanent Banner Wishes</summary>
+    <table>
+    {%- for wish in permanent_banner_history -%}
+    <tr>
+        <td>{{ wish.time }}</td>
+        <td>{{ wish.name }} ({{ wish.rarity }}* {{ wish.type }})</td>
+    </tr>
+    {%- endfor -%}
+    </table>
+</details>

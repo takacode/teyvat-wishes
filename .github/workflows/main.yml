@@ -1,0 +1,37 @@
+name: "Fetch latest wish history"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch_wish_history:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install requirements
+        run: |
+          pip install -r requirements.txt
+      - name: Run main.py
+        env:
+          WISH_LINK: ${{ secrets.WISH_LINK }}
+        run: |
+          python main.py -o README.md
+      - name: Format with prettier
+        run: |
+          npx prettier README.md --write --parser html
+      - name: Commit and push if changed
+        run: |
+          git diff
+          git config user.name "TakaGG"
+          git config user.email "github@takagg.com"
+          git add README.md
+          git commit -asm "📊 Fetched latest wish history"
+          git push
